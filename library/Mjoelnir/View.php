@@ -26,6 +26,7 @@ class Mjoelnir_View extends Smarty
         $this->assign('WEB_ROOT', WEB_ROOT);
         $this->assign('iPageCurrent', Mjoelnir_Request::getParameter('p', 1));
         $this->assign('iPageSize', ITEMS_PER_PAGE);
+        $this->assign('oCurrentUser', UserModel::getCurrentUser());
     }
 
 

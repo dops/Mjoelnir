@@ -1,0 +1,23 @@
+{if isset($prefix)}{$prefix}{/if}
+<div id="{$wrapperId}" class="field fieldRadiomulti clear {$classes}">
+    {if isset($label)}
+    <div class="labelWrapper">
+        {if $label}<label for="{$elementId}">{$label}{if $required} *{/if}</label>{/if}
+        {if isset($labelDescription)}<p class="formElementLabelDescription">{$labelDescription}</p>{/if}
+    </div>{/if}<div class="elementWrapper">
+        {foreach $valueList as $key=>$optionData}
+            {assign var=optionOptions value=""}
+            {if isset($optionData['options'])}
+                {foreach $optionData['options'] as $optionKey=>$optionValue}
+                    {assign var=optionOptions value="`$optionOptions` `$optionKey`=\"`$optionValue`\""}
+                {/foreach}
+            {/if}
+            <div class="singleElement">
+                <input type="radio" name="{$name}" id="formElement{ucfirst(strtolower($name))}{ucfirst(strtolower($optionData['value']))}" {if $value == $key}checked="checked"{/if} value="{$key}" {$optionOptions} />
+                <label for="formElement{ucfirst(strtolower($name))}{ucfirst(strtolower($optionData['value']))}">{$optionData['value']}</label>
+            </div>
+        {/foreach}
+        {if isset($description)}<span class="formElementDescription">{$description}</span>{/if}
+    </div>
+</div>
+{if isset($suffix)}{$suffix}{/if}

@@ -6,9 +6,9 @@ class IndexController extends \Mjoelnir_Controller_Abstract
 {
     public function indexAction() {
         
-        $this->_oView->assign('oLoginForm', UserController::getLoginForm());
+        $this->oView->assign('oLoginForm', UserController::getLoginForm());
         
-        $this->_oView->setTemplate('index/index.tpl.html');
-        return $this->_oView;
+        $this->oView->setTemplate('index/index.tpl.html');
+        return $this->oView;
     }
 }

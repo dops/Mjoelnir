@@ -25,7 +25,6 @@ if (substr($_SERVER['DOCUMENT_ROOT'], strlen($_SERVER['DOCUMENT_ROOT']) - 1, 1) 
 }
 define('WEB_ROOT', '/');
 define('PATH_LIBRARY', DOCUMENT_ROOT . '../library/');
-//define('SMARTY_DIR', PATH_LIBRARY . 'Smarty/');
 define('PATH_LOG', DOCUMENT_ROOT . '../var/log/');
 define('PATH_MODEL', DOCUMENT_ROOT . '../application/model/');
 define('PATH_INTERFACE', DOCUMENT_ROOT . '../application/interface/');
@@ -84,11 +83,6 @@ define('ADMIN_USER_ROLE_ID', 1);
  * To allow unregistered users to view more than just the default page, a user role id for the uregesitered user rights is defined here.
  */
 define('UNREGISTERED_USER_ROLE', 2);
-
-/**
- * The userrole used for customer users.l
- */
-define('CUSTOMER_USER_ROLE_ID', 3);
 
 /**
  * Authentification

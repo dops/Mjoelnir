@@ -25,11 +25,11 @@ class UserroleController extends \Mjoelnir_Controller_Abstract
         $site->addBreadcrumb(array('title' => 'Userverwaltung', 'link'  => WEB_ROOT . 'user'));
         $site->addBreadcrumb(array('title' => 'Userrollen verwalten', 'link'  => WEB_ROOT . 'userrole'));
 
-        $this->_oView->assign('WEB_ROOT', WEB_ROOT);
-        $this->_oView->assign('userroles', \UserroleModel::getAll());
+        $this->oView->assign('WEB_ROOT', WEB_ROOT);
+        $this->oView->assign('userroles', \UserroleModel::getAll());
 
-        $this->_oView->setTemplate('userrole/list.tpl.html');
-        return $this->_oView;
+        $this->oView->setTemplate('userrole/list.tpl.html');
+        return $this->oView;
     }
 
     /**
@@ -118,12 +118,12 @@ class UserroleController extends \Mjoelnir_Controller_Abstract
         $form->addElement('submit', 'save', 'Speichern');
         $form->addElement('submit', 'save_return', 'Speichern und zurück');
 
-        $this->_oView->assign('WEB_ROOT', WEB_ROOT);
-        $this->_oView->assign('aMessages', $aMessages);
-        $this->_oView->assign('userForm', $form);
+        $this->oView->assign('WEB_ROOT', WEB_ROOT);
+        $this->oView->assign('aMessages', $aMessages);
+        $this->oView->assign('userForm', $form);
 
-        $this->_oView->setTemplate('userrole/edit.tpl.html');
-        return $this->_oView;
+        $this->oView->setTemplate('userrole/edit.tpl.html');
+        return $this->oView;
     }
 
     /**
@@ -288,10 +288,10 @@ class UserroleController extends \Mjoelnir_Controller_Abstract
             return true;
         }
 
-        $this->_oView->assign('messages', $aMessages);
+        $this->oView->assign('messages', $aMessages);
 
-        $this->_oView->setTemplate('userrole/permissionUpdate.tpl.html');
-        return $this->_oView;
+        $this->oView->setTemplate('userrole/permissionUpdate.tpl.html');
+        return $this->oView;
     }
 
 }

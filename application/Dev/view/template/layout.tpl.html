@@ -1,31 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <base href="http://ms.mjoelnir.dev">
         <title>Mjoelnir Dev</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
         {$sCss}
         {$sJsHeader}
-        
-        <script type="text/javascript">
-            less = {
-                env: "development", // or "production"
-                async: false,       // load imports async
-                fileAsync: false,   // load imports async when in a page under
-                                    // a file protocol
-                poll: 1000,         // when in watch mode, time in ms between polls
-                functions: {},      // user functions, keyed by name
-                dumpLineNumbers: "comments", // or "mediaQuery" or "all"
-                relativeUrls: false,// whether to adjust url's to be relative
-                                    // if false, url's are already relative to the
-                                    // entry less file
-                rootpath: ":/a.com/"// a path to add on to the start of every url
-                                    //resource
-            };
-        </script>
     </head>
-    <body>
-        <header>
+    <body class="skin-blue">
+        {include '_header.tpl.html'}
+<!--        <header class="header">
+            <a href="index.html" class="logo">
+                 Add the class icon to your logo image or logo icon to add the margining 
+                AdminLTE
+            </a>
             <div id="headerWrapper">
                 <nav>
                     <ul>
@@ -34,23 +21,14 @@
                         {*/if*}
                     </ul>
                 </nav>
-
-                <div id="loginWrapper">
-                    <div class="toggle clear">
-                        <a>Einloggen</a>
-                    </div>
-                    <div class="content">
-                        {$oLoginForm->getElement('name')}
-                        {$oLoginForm->getElement('password')}
-                        {$oLoginForm->getElement('login')}
-                    </div>
-                </div>
             </div>
-        </header>
+        </header>-->
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+            {include '_left.tpl.html'}
+            {include '_right.tpl.html'}
+        </div>
         <div id="pageWrapper">
             {include file="messages.tpl.html"}
-            
-            
         </div>
         {block name="content"}{/block}
         <h1><a href="">link</a></h1>

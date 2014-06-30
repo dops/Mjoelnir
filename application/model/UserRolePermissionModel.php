@@ -32,8 +32,8 @@ class UserRolePermissionModel extends AbstractModel
         'allow'                     => null,
         'time_insert'               => null,
         'time_update'               => null,
-   		'insert_user_id' 			=> null,
-   		'update_user_id' 			=> null
+        'insert_user_id'            => null,
+        'update_user_id'            => null
     );
 
     /**

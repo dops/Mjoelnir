@@ -19,10 +19,10 @@ class UserController extends \Mjoelnir_Controller_Abstract
         $site = \Mjoelnir_Site::getInstance();
         $site->addBreadcrumb(array('title' => 'Userverwaltung', 'link'  => WEB_ROOT . 'user'));
 
-        $this->_oView->assign('WEB_ROOT', WEB_ROOT);
+        $this->oView->assign('WEB_ROOT', WEB_ROOT);
 
-        $this->_oView->setTemplate('user/index.tpl.html');
-        return $this->_oView;
+        $this->oView->setTemplate('user/index.tpl.html');
+        return $this->oView;
     }
 
     /**
@@ -63,11 +63,11 @@ class UserController extends \Mjoelnir_Controller_Abstract
         $oFilterSubmit = new \Mjoelnir_Form_Element_Button('submitFilters', 'Finden', array('onclick' => 'return setFormValue(\'frmList\', \'_submitFilters\', 1, true);'));
         $sFilter       = '<th></th><th>' . $oFilterName . '</th><th>' . $oFilterEmail . '</th><th></th><th>' . $oFilterSubmit . '</th>';
 
-        $this->_oView->assign('sFilter', $sFilter);
-        $this->_oView->assign('aUser', $aUsers);
+        $this->oView->assign('sFilter', $sFilter);
+        $this->oView->assign('aUser', $aUsers);
 
-        $this->_oView->setTemplate('user/list.tpl.html');
-        return $this->_oView;
+        $this->oView->setTemplate('user/list.tpl.html');
+        return $this->oView;
     }
 
     /**
@@ -204,12 +204,12 @@ class UserController extends \Mjoelnir_Controller_Abstract
             }
         }
 
-        $this->_oView->assign('WEB_ROOT', WEB_ROOT);
-        $this->_oView->assign('error', $aMessages['error']);
-        $this->_oView->assign('userForm', $this->_getEditForm($aMessages));
+        $this->oView->assign('WEB_ROOT', WEB_ROOT);
+        $this->oView->assign('error', $aMessages['error']);
+        $this->oView->assign('userForm', $this->_getEditForm($aMessages));
 
-        $this->_oView->setTemplate('user/edit.tpl.html');
-        return $this->_oView;
+        $this->oView->setTemplate('user/edit.tpl.html');
+        return $this->oView;
     }
 
     /**
@@ -269,22 +269,20 @@ class UserController extends \Mjoelnir_Controller_Abstract
             }
         }
 
-        if (count($aMessages['error']) > 0) {
-            $this->_oView->assign('aMessages', $aMessages);
-        }
+        $this->oView->assign('aMessages', $aMessages);
+        $this->oView->assign('oFormLogin', $this->getLoginForm());
 
-        $this->_oView->assign('oFormLogin', $this->getLoginForm());
-
-        $this->_oView->setTemplate('user/login.tpl.html');
-        return $this->_oView;
+        $this->oView->setTemplate('user/login.tpl.html');
+                
+        return $this->oView;
     }
 
     public static function getLoginForm($aMessages = array())
     {
-        $oForm = new \Mjoelnir_Form('frmLogin', '', 'post', array(), PATH_TEMPLATE . 'form/');
-        $oForm->addElement('text', 'name', \Mjoelnir_Request::getParameter('name'), array('placeholder' => 'Name', 'error' => (isset($aMessages['error']['name'])) ? true : false));
-        $oForm->addElement('password', 'password', '', array('placeholder' => 'Passwort', 'error' => (isset($aMessages['error']['password'])) ? true : false));
-        $oForm->addElement('submit', 'login', 'Einloggen');
+        $oForm = new \Mjoelnir_Form('frmLogin', '', 'post', array(), PATH_TEMPLATE . 'formElements/');
+        $oForm->addElement('text', 'name', \Mjoelnir_Request::getParameter('name'), array('placeholder' => 'Name', 'class' => 'form-control', 'error' => (isset($aMessages['error']['name'])) ? true : false));
+        $oForm->addElement('password', 'password', '', array('placeholder' => 'Passwort', 'class' => 'form-control', 'error' => (isset($aMessages['error']['password'])) ? true : false));
+        $oForm->addElement('submit', 'login', 'Einloggen', array('class' => 'btn btn-primary'));
 
         return $oForm;
     }

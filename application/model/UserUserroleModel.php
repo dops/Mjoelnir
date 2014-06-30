@@ -33,8 +33,9 @@ class UserUserroleModel extends AbstractModel
         'user_id'           => null,
         'user_role_id'      => null,
         'time_insert'       => null,
-   		'insert_user_id' => null,
-   		'update_user_id' => null
+        'time_update'       => null,
+        'insert_user_id'    => null,
+        'update_user_id'    => null
     );
 
     /**

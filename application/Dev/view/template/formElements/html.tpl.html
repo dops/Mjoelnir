@@ -1,0 +1,12 @@
+{if isset($prefix)}{$prefix}{/if}
+<div id="{$wrapperId}" class="field fieldHtml clear {$classes}">
+    {if isset($label)}
+        <div class="labelWrapper">
+            {if isset($label)}<label for="{$elementId}">{$label}{if $required} *{/if}</label>{/if}
+            {if isset($labelDescription)}<p class="formElementLabelDescription">{$labelDescription}</p>{/if}
+        </div>{/if}<div class="elementWrapper">
+        {if strlen($leadingUnit) > 0}<span class="unit leadingUnit">{$leadingUnit}</span> {/if}{$value}{if strlen($trailingUnit) > 0} <span class="unit trailingUnit">{$trailingUnit}</span>{/if}
+        {if isset($description)}<p class="formElementDescription">{$description}</p>{/if}
+    </div>
+</div>
+{if isset($suffix)}{$suffix}{/if}

@@ -43,10 +43,10 @@ spl_autoload_register('Tcpdf_Autoloader');
 
 
 function Smarty_Autoloader($sClassName) {
-//    define('SMARTY_DIR', PATH_LIBRARY . 'Smarty-3.1.16/libs/');
+//    define('SMARTY_DIR', PATH_LIBRARY . 'Smarty/');
 
-    if ($sClassName == 'Smarty' && file_exists(PATH_LIBRARY . 'Smarty-3.1.16/libs/Smarty.class.php')) {
-        require_once(PATH_LIBRARY . 'Smarty-3.1.16/libs/Smarty.class.php');
+    if ($sClassName == 'Smarty' && file_exists(PATH_LIBRARY . 'Smarty/Smarty.class.php')) {
+        require_once(PATH_LIBRARY . 'Smarty/Smarty.class.php');
     }
 }
 spl_autoload_register('Smarty_Autoloader');

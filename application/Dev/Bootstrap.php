@@ -47,40 +47,34 @@ class Bootstrap
         $oLog->log('Aufruf: Controller: ' . $this->oSite->getController() . ', Action: ' . $this->oSite->getAction(), Mjoelnir_Log::DEBUG);
 
         try {
-            if (!$oAcl->isAllowed(APPLICATION_NAME, strtolower($this->oSite->getController()), strtolower($this->oSite->getAction()))) {
-//                if (RETURN_METHOD == 'json') {
-//                    echo json_encode(array('error'   => true, 'status'  => 403, 'message' => Mjoelnir_Message::getMessage(2010)));
-//                    exit();
-//                }
-//
-//                Mjoelnir_Redirect::redirect(WEB_ROOT . 'error/forbidden', 403);
-            }
+            $bIsAllowed = $oAcl->isAllowed(APPLICATION_NAME, $this->oSite->getController(), $this->oSite->getAction());
+            $oLog->log('ACL check for ' . $this->oSite->getController() . '/' . $this->oSite->getAction() . ': ' . (int) $bIsAllowed);
+            
+            if ($this->oUser !== false) {
+                // Authorized user
+                if (!$bIsAllowed) {
+                    $oLog->log('The user tried to access a not defined permission.', Mjoelnir_Logger_Abstract::INFO);
 
-//            if ($this->oUser !== false) {
-//                // Authorized user
-//                if (!$oAcl->isAllowed(APPLICATION_NAME, strtolower($this->oSite->getPage()), strtolower($this->oSite->getAction()))) {
-//                    $oLog->log('The user tried to access a not defined permission.', Mjoelnir_Logger_Abstract::INFO);
-//
-//                    if (RETURN_METHOD == 'json') {
-//                        echo json_encode(array('error'   => true, 'status'  => 403, 'message' => Mjoelnir_Message::getMessage(2010)));
-//                        exit();
-//                    }
-//
-//                    Mjoelnir_Redirect::redirect(WEB_ROOT . 'error/forbidden', 403);
-//                }
-//            } else {
-//                // Not authorized user
-//                $oLog->log('The user is not logged in.', Mjoelnir_Logger_Abstract::INFO);
-//
-//                if ($this->oSite->getPage() != 'user' || $this->oSite->getAction() != 'login') {
-//                    if (RETURN_METHOD == 'json') {
-//                        echo json_encode(array('error'   => true, 'status'  => 401, 'message' => Mjoelnir_Message::getMessage(2009)));
-//                        exit();
-//                    }
-//
-//                    Mjoelnir_Redirect::redirect(WEB_ROOT . 'user/login/', 200);
-//                }
-//            }
+                    if (RETURN_METHOD == 'json') {
+                        echo json_encode(array('error'   => true, 'status'  => 403, 'message' => Mjoelnir_Message::getMessage(2010)));
+                        exit();
+                    }
+
+                    Mjoelnir_Redirect::redirect(WEB_ROOT . 'error/forbidden', 403);
+                }
+            } else {
+                // Not authorized user
+                $oLog->log('The user is not logged in.', Mjoelnir_Logger_Abstract::INFO);
+
+                if ($this->oSite->getController() != 'user' || $this->oSite->getAction() != 'login') {
+                    if (RETURN_METHOD == 'json') {
+                        echo json_encode(array('error'   => true, 'status'  => 401, 'message' => Mjoelnir_Message::getMessage(2009)));
+                        exit();
+                    }
+
+                    Mjoelnir_Redirect::redirect(WEB_ROOT . 'user/login/', 200);
+                }
+            }
         }
         catch (Mjoelnir_Acl_Exception $e) {
             $oLog->log('Something went wrong while loading the page.', Mjoelnir_Logger_Abstract::EMERG);
@@ -101,33 +95,59 @@ class Bootstrap
 //        $this->oSite->addJsFile('jquery/jquery-ui-sliderAccess.js', 'footer');
 //        $this->oSite->addJsFile('jquery/jquery.easing.1.3.js', 'footer');
 //        $this->oSite->addJsFile('form.js', 'footer');
-//        $this->oSite->addDebugContent('<div id="memoryPeakUsage">Memory peak usage: ' . round(memory_get_peak_usage() / 1024 / 1024, 2) . '</div>');
-//        $this->oSite->setBaseTemplate('layout.tpl.html');
-//
-//        $oMessages = Mjoelnir_Message::getInstance(Mjoelnir_Request::getInstance());
-//
-//        $view = $this->oSite->run();
-//
-//        $view->setTemplateDir(PATH_TEMPLATE);
-//
-//        $view->assign('baseUrl', (preg_match('/HTTP\//', $_SERVER['SERVER_PROTOCOL'])) ? 'http://' . $_SERVER['HTTP_HOST'] : 'https://' . $_SERVER['HTTP_HOST']);
-//        $view->assign('applicationEnv', APPLICATION_ENV);
-//        $view->assign('sApplicationName', APPLICATION_NAME);
-//        $view->assign('sWebRoot', WEB_ROOT);
-//        $view->assign('oAcl', $oAcl);
-//        $view->assign('oCurrentUser', UserModel::getCurrentUser());
-//        $view->assign('oSite', $this->oSite);
-//        $aTemplateMessages = (array) $view->getTemplateVars('aMessages');
-//        $aUrlMessages      = $oMessages->getAllMessages();
-//        $aMessages         = array_merge_recursive($aTemplateMessages, $aUrlMessages);
-//        $view->assign('aMessages', $aMessages);
-//        $view->assign('sFormOrderFilter', $this->_getOrderAndFilterForm());
-//
-//        if (\Mjoelnir_Request::getParameter('HTTP_MJOELNIR_REMOTE', false)) {
-//            $this->oSite->setBaseTemplate('blank.tpl.html');
-//        }
+        
+        $this->oSite->addCssFile('../admin_lte/css/bootstrap.min.css', false);
+        $this->oSite->addCssFile('../admin_lte/css/font-awesome.min.css', false);
+        $this->oSite->addCssFile('../admin_lte/css/ionicons.min.css', false);
+        $this->oSite->addCssFile('../admin_lte/css/morris/morris.css', false);
+        $this->oSite->addCssFile('../admin_lte/css/jvectormap/jquery-jvectormap-1.2.2.css', false);
+        $this->oSite->addCssFile('../admin_lte/css/fullcalendar/fullcalendar.css', false);
+        $this->oSite->addCssFile('../admin_lte/css/daterangepicker/daterangepicker-bs3.css', false);
+        $this->oSite->addCssFile('../admin_lte/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css', false);
+        $this->oSite->addCssFile('../admin_lte/css/AdminLTE.css', false);
+        
+        $this->oSite->addJsFile('http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js');
+        $this->oSite->addJsFile('../admin_lte/js/jquery-ui-1.10.3.min.js');
+        $this->oSite->addJsFile('../admin_lte/js/bootstrap.min.js');
+        $this->oSite->addJsFile('//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js');
+        $this->oSite->addJsFile('../admin_lte/js/plugins/morris/morris.min.js');
+        $this->oSite->addJsFile('../admin_lte/js/plugins/sparkline/jquery.sparkline.min.js');
+        $this->oSite->addJsFile('../admin_lte/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js');
+        $this->oSite->addJsFile('../admin_lte/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js');
+        $this->oSite->addJsFile('../admin_lte/js/plugins/fullcalendar/fullcalendar.min.js');
+        $this->oSite->addJsFile('../admin_lte/js/plugins/jqueryKnob/jquery.knob.js');
+        $this->oSite->addJsFile('../admin_lte/js/plugins/daterangepicker/daterangepicker.js');
+        $this->oSite->addJsFile('../admin_lte/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js');
+        $this->oSite->addJsFile('../admin_lte/js/plugins/iCheck/icheck.min.js');
+        $this->oSite->addJsFile('../admin_lte/js/AdminLTE/app.js');
+        
+        $this->oSite->addDebugContent('<div id="memoryPeakUsage">Memory peak usage: ' . round(memory_get_peak_usage() / 1024 / 1024, 2) . '</div>');
+        $this->oSite->setBaseTemplate('layout.tpl.html');
 
-//        $this->oSite->display($view);
+        $oMessages = Mjoelnir_Message::getInstance(Mjoelnir_Request::getInstance());
+
+        $view = $this->oSite->run();
+
+        $view->setTemplateDir(PATH_TEMPLATE);
+
+        $view->assign('baseUrl', (preg_match('/HTTP\//', $_SERVER['SERVER_PROTOCOL'])) ? 'http://' . $_SERVER['HTTP_HOST'] : 'https://' . $_SERVER['HTTP_HOST']);
+        $view->assign('applicationEnv', APPLICATION_ENV);
+        $view->assign('sApplicationName', APPLICATION_NAME);
+        $view->assign('sWebRoot', WEB_ROOT);
+        $view->assign('oAcl', $oAcl);
+        $view->assign('oCurrentUser', UserModel::getCurrentUser());
+        $view->assign('oSite', $this->oSite);
+        $aTemplateMessages = (array) $view->getTemplateVars('aMessages');
+        $aUrlMessages      = $oMessages->getAllMessages();
+        $aMessages         = array_merge_recursive($aTemplateMessages, $aUrlMessages);
+        $view->assign('aMessages', $aMessages);
+        $view->assign('sFormOrderFilter', $this->_getOrderAndFilterForm());
+
+        if (\Mjoelnir_Request::getParameter('HTTP_MJOELNIR_REMOTE', false)) {
+            $this->oSite->setBaseTemplate('blank.tpl.html');
+        }
+
+        $this->oSite->display($view);
     }
 
     /**

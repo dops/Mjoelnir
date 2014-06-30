@@ -392,7 +392,11 @@ class Mjoelnir_Site
      */
     public function addJsFile($js, $location = 'footer')
     {
-        if (strlen($js) > 0 && file_exists(DOCUMENT_ROOT . PATH_JS . $js) && array_key_exists($location, $this->_javascript)) {
+        if (strpos($js, 'http') !== false or strpos($js, '//') !== false) {
+            $this->_javascript[$location][] = '<script type="text/javascript" src="' . $js . '"></script>';
+            return true;
+        }
+        elseif (strlen($js) > 0 && file_exists(DOCUMENT_ROOT . PATH_JS . $js) && array_key_exists($location, $this->_javascript)) {
             $this->_javascript[$location][] = '<script type="text/javascript" src="http://' . $_SERVER['HTTP_HOST'] . WEB_ROOT . PATH_JS . $js . '"></script>';
             return true;
         }

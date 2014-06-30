@@ -6,19 +6,19 @@ class Mjoelnir_Controller_Abstract
      * A view instance.
      * @var Smarty
      */
-    public $_oView  = null;
+    public $oView  = null;
 
     /**
      * An acl instance.
      * @var Mjoelnir_Acl
      */
-    protected $_oAcl    = null;
+    protected $oAcl    = null;
     
     public function __construct() {
-        $this->_oView    = new Mjoelnir_View();
-        $this->_oAcl    = Mjoelnir_Acl::getInstance();
+        $this->oView    = new Mjoelnir_View();
+        $this->oAcl    = Mjoelnir_Acl::getInstance();
 
-        $this->_oView->assign('oAcl', $this->_oAcl);
+        $this->oView->assign('oAcl', $this->oAcl);
     }
     
     protected function loadBox($sBoxname, $mData, $sLocation) {
