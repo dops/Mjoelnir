@@ -1,0 +1,66 @@
+/* @group icons */
+/* default icon settings */
+span.icon {
+    display: inline-block;
+    margin: 2px 0;
+    padding: 0;
+    min-width: 16px;
+    min-height: 16px;
+    vertical-align: bottom;
+    background: transparent url(/images/icons/sprite.png);
+}
+
+/* if the icon has text content ... */
+span.icon span {
+    padding: 0 0 0 18px;
+    min-width: 16px;
+}
+
+/* icon image positions */
+span.iconUserAdd            { background-position: -33px -96px; }
+span.iconUserEdit           { background-position: -96px -80px; }
+span.iconUserRoleAdd        { background-position: -496px -432px; }
+span.iconUserRoleEdit       { background-position: -496px -400px; }
+span.iconUserRoleDelete     { background-position: -496px -416px; }
+span.iconUserRoleUpdate     { background-position: -496px -384px; }
+
+span.iconCampaignOverview   { background-position: 0 -176px; }
+span.iconCampaignAdd        { background-position: -145px -176px; }
+span.iconCampaignEdit       { background-position: -113px -176px; }
+span.iconCampaignDelete     { background-position: -129px -176px; }
+
+span.iconPdf                { background-position: -304px -144px; }
+span.iconQuestionmark       { background-position: -368px -64px; }
+span.iconPositiv            { background-position: -112px -496px; }
+span.iconNegative           { background-position: -240px -400px; }
+
+span.iconBusinessDirAdd     { background-position: -321px -64px; }
+span.iconBusinessDirDetail  { background-position: -336px -224px; }
+
+span.iconAddBeInvoice       { background-position: -128px -496px; }
+span.iconAddBuInvoice       { background-position: -144px -496px; }
+span.iconAddBeBuInvoice     { background-position: -160px -496px; }
+
+span.iconEmailAdd           { background-position: -400px -64px; }
+span.iconEmailEdit          { background-position: -400px -16px; }
+span.iconEmailDelete        { background-position: -400px -32px; }
+span.iconEmailSend          { background-position: -384px -384px; }
+
+/* old icons
+span.iconSuccess            { background-position: -421px -225px; }
+span.iconError              { background-position: -261px -224px; }
+span.iconEdit               { background-position: -229px -128px; }
+span.iconAdd                { background-position: -197px -160px; }
+span.iconUpdate             { background-position: -389px -128px; }
+span.iconView               { background-position: -101px -32px; }
+span.iconSend               { background-position: -101px 0px; }
+
+span.iconClearing           { background-position: -5px -416px; }
+span.iconReporting          { background-position: -37px -416px; }
+span.iconReversal           { background-position: -133px -416px; }
+span.iconCreditNote         { background-position: -70px -416px; }
+span.iconDebitNote          { background-position: -101px -416px; }
+span.iconCreateDebitNote    { background-position: -357px -416px; }
+span.iconCreateReversal     { background-position: -390px -416px; }
+*/
+/*@end*/
